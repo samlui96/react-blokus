@@ -1,28 +1,27 @@
 import React, { useState, useRef } from "react";
+import useStyles from "./Tiles.styles";
 import { useSelector, useDispatch } from "react-redux";
 import { changeGroup, changeTile } from "../redux/tileSlice";
-import useStyles from "./Tiles.styles";
-import { Nav, ListGroup } from "react-bootstrap";
+import { ListGroup, Tabs, Tab } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Cell from "./Cell"
+
 
 const Tiles = ({ data }) => {
   const id = useSelector((state) => state.tile.id);
   const group = useSelector((state) => state.tile.group);
-  const dispatch = useDispatch();
   const [list, setList] = useState([data[0]]);
   const [dragging, setDragging] = useState(false);
 
+  const dispatch = useDispatch();
   const classes = useStyles();
-
   const dragItem = useRef();
   const dragNode = useRef();
 
-
-  const handleGroupChange = (e, params) => {
-    dispatch(changeGroup(params.grpI));
-    setList([data[params.grpI]])
+  const handleSelect = (key) => {
+    dispatch(changeGroup(key));
+    setList([data[key]])
   }
-
 
   const handleDragStart = (e, params) => {
     dispatch(changeTile(list[params.grpI].items[params.itemI]));
@@ -72,17 +71,19 @@ const Tiles = ({ data }) => {
 
   return (
     <div>
-      <Nav variant="tabs" defaultActiveKey={list[0].title}>
-      {data.map((grp, grpI) => (
-        <Nav.Item 
-          key={grp.title} 
-          onClick={(e) => handleGroupChange(e, {grpI})}
-        >
-          <Nav.Link eventKey={grp.title}>{grp.title}</Nav.Link>
-        </Nav.Item>
+      <Tabs 
+        defaultActiveKey={list[0].grpI} 
+        onSelect={(key) => handleSelect(key)}
+      >
+        {data.map((grp, grpI) => (
+          <Tab
+            key={grpI}
+            eventKey={grpI}
+            title={grp.title}
+          />
         ))}
-      </Nav>
-      {list.map((grp, grpI) => (
+      </Tabs>
+      {/* {list.map((grp, grpI) => (
         <ListGroup
           horizontal
           key={grp.title}
@@ -109,7 +110,8 @@ const Tiles = ({ data }) => {
             </ListGroup.Item>
           ))}
         </ListGroup>
-      ))}
+      ))} */}
+      <Cell></Cell>
     </div>
   );
 };
