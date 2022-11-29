@@ -2,10 +2,85 @@ import React, { useState, useRef } from "react";
 import useStyles from "./Tiles.styles";
 import { useSelector, useDispatch } from "react-redux";
 import { changeGroup, changeTile } from "../redux/tileSlice";
-import { ListGroup, Tabs, Tab } from "react-bootstrap";
+import { ListGroup, Tabs, Tab, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Cell from "./Cell"
 
+const TETROMINOS = [
+  [
+    [0,1,1],
+    [1,1,0],
+    [0,1,0]
+  ],
+  [
+    [0,0,0,0,0],
+    [0,0,0,0,0],
+    [1,1,1,1,1],
+    [0,0,0,0,0], 
+    [0,0,0,0,0]
+  ],
+  [
+    [0,0,0,0],
+    [1,0,0,0],
+    [1,1,1,1],
+    [0,0,0,0]
+  ],
+  [
+    [0,0,0,0],
+    [1,1,0,0],
+    [0,1,1,1],            
+    [0,0,0,0]
+  ],
+  [
+    [1,1,1],
+    [1,1,0],
+    [0,0,0]
+  ],
+  [
+      [1,1,1],
+      [0,1,0],
+      [0,1,0]
+  ],
+  [
+      [1,0,1],
+      [1,1,1],
+      [0,0,0]
+  ],
+  [
+      [1,0,0],
+      [1,0,0],
+      [1,1,1]
+  ],
+  [
+      [0,0,1],
+      [1,1,1],
+      [1,0,0]
+  ],
+  [
+      [0,1,0],
+      [1,1,1],
+      [0,1,0]
+  ],
+  [
+      [0,1,0,0],
+      [1,1,1,1],
+      [0,0,0,0],
+      [0,0,0,0]
+  ],
+  [
+      [1,1,0],
+      [0,1,0],
+      [0,1,1]
+  ]
+]
+
+const pattern = [
+    [0,0,0,0,0],
+    [0,0,1,1,0],
+    [0,1,1,0,0],
+    [0,0,1,0,0],
+    [0,0,0,0,0]
+  ]
 
 const Tiles = ({ data }) => {
   const id = useSelector((state) => state.tile.id);
@@ -111,7 +186,27 @@ const Tiles = ({ data }) => {
           ))}
         </ListGroup>
       ))} */}
-      <Cell></Cell>
+      <ListGroup
+           horizontal
+          // key={"1"}
+          className={classes.tileGroup}
+          // onDragEnter={
+          //   dragging && !grp.items.length
+          //     ? (e) => handleDragEnter(e, { grpI, itmeI: 0 })
+          //     : null
+          // }
+        >
+        <Row sm="auto" >
+          {TETROMINOS.map((item, itemI) => (
+              <ListGroup.Item style={{padding: 1}}>
+                <div draggable>
+                  <Cell key={itemI} pattern={item} tiles={[item]}></Cell> 
+                </div>
+              </ListGroup.Item>
+          ))}
+        </Row>
+      </ListGroup>
+
     </div>
   );
 };

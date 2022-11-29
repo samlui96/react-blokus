@@ -8,10 +8,10 @@ export default createUseStyles({
         //margin: 'auto',
         //justifyContent: 'center',
         //alignContent: 'center',
-        width: '60vh',
-        height: '60vh', 
+        width: '70vh',
+        height: '70vh', 
         outline: 'solid black',
-        marginBottom: '5vh',
+        marginBottom: '1vh',
     },
     cell: {
         cursor: 'pointer',
