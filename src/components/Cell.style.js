@@ -1,17 +1,22 @@
 import { createUseStyles } from 'react-jss'
 
+
 export default createUseStyles({
-    cell: {
-        width: 'auto',
-        background: 'rgba('.concat(props => props.color,', 0.8)'),
-        border: {
-            width: props => (props.type === 0 ? '0px' : '4px'),
-            style: props => (props.type === 0 ? 'solid' : 'solid'),
-        },
-        borderBottomColor: 'rgba('.concat(props => props.color,', 0.1)'),
-        borderTopColor: 'rgba('.concat(props => props.color,', 1)'),
-        borderRightColor: 'rgba('.concat(props => props.color,', 1)'),
-        borderLeftColor: 'rgba('.concat(props => props.color,', 0.3)')
+    cell: (props) => ({
+        display: 'grid',
+        gridTemplateRows:'repeat('.concat(props.length, ', 1fr)'),
+        gridTemplateColumns: 'repeat('.concat(props.length, ', 1fr)'),
+        width: '5vh',
+        height: '5vh', 
+        //outline: 'solid black',
+        //margin: '1vh',
+    }),
+    inCell: {
+        cursor: 'pointer',
+        background: 'white',
+        transition: 'all 100ms linear',
+        position: 'relative',
+        margin: '0.06vh',
     }
 })
 
