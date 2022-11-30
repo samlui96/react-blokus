@@ -12,19 +12,17 @@ const offCell = {
   color: "#000000",
 };
 
-const Cell = ({ pattern, tiles }) => {
+const Cell = ({ tiles }) => {
   let cellArray = [];
-  tiles.map((cell, cellI) => {
-    cell.map((row, rowI) => {
-      row.map((col, colI) => 
-        cellArray.push(col === 1 ? onCell : offCell)
-      )
-    });
+  tiles.map((row, rowI) => {
+    row.map((col, colI) => 
+      cellArray.push(col === 1 ? onCell : offCell)
+    )
   })
-  const [cells, setCells] = useState(cellArray);
-  const classes = useStyles(pattern);
+  // const [cells, setCells] = useState(cellArray);
+  const classes = useStyles(tiles);
 
-  useEffect(() => {});
+  // useEffect(() => {});
 
   return (
     <div className={classes.cell}>
@@ -34,29 +32,9 @@ const Cell = ({ pattern, tiles }) => {
           className={classes.inCell}
           style={{ 
             background: cell.on ? cell.color : "#FFFFFF", 
-            outline: cell.on ? "1px solid black" : "", 
           }}
         ></div>
       ))}
-      {/* {Object.entries(tiles).forEach((item) => {
-                let tileItems = item[1]
-                // console.log(tileItems)
-                tileItems.map((row, rowI) => (
-                    row.map((col, colI) => {
-                        <div
-                            key={rowI*4+(colI+1)}
-                            className={classes.inCell}
-                            style={{ background: col===1 ? "#FFF000" : "#FFFFFF" }}
-                        >
-                        </div>
-                    })
-                ))
-                // <div
-                //     key={item[0]}
-                //     className={classes.inCell}
-                //     >
-                // </div>
-            })} */}
     </div>
   );
 };

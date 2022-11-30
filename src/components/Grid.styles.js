@@ -11,7 +11,8 @@ export default createUseStyles({
         width: '70vh',
         height: '70vh', 
         outline: 'solid black',
-        marginBottom: '1vh',
+        marginBlock: '1vh',
+
     },
     cell: {
         cursor: 'pointer',

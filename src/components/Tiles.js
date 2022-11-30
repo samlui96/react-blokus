@@ -1,91 +1,17 @@
 import React, { useState, useRef } from "react";
 import useStyles from "./Tiles.styles";
 import { useSelector, useDispatch } from "react-redux";
-import { changeGroup, changeTile } from "../redux/tileSlice";
-import { ListGroup, Tabs, Tab, Row, Col } from "react-bootstrap";
+import { changeGroup, changeTile, changeEndNode } from "../redux/tileSlice";
+import { ListGroup, Tabs, Tab, Row } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Cell from "./Cell"
+import POLYOMINOES from './constant'
 
-const TETROMINOS = [
-  [
-    [0,1,1],
-    [1,1,0],
-    [0,1,0]
-  ],
-  [
-    [0,0,0,0,0],
-    [0,0,0,0,0],
-    [1,1,1,1,1],
-    [0,0,0,0,0], 
-    [0,0,0,0,0]
-  ],
-  [
-    [0,0,0,0],
-    [1,0,0,0],
-    [1,1,1,1],
-    [0,0,0,0]
-  ],
-  [
-    [0,0,0,0],
-    [1,1,0,0],
-    [0,1,1,1],            
-    [0,0,0,0]
-  ],
-  [
-    [1,1,1],
-    [1,1,0],
-    [0,0,0]
-  ],
-  [
-      [1,1,1],
-      [0,1,0],
-      [0,1,0]
-  ],
-  [
-      [1,0,1],
-      [1,1,1],
-      [0,0,0]
-  ],
-  [
-      [1,0,0],
-      [1,0,0],
-      [1,1,1]
-  ],
-  [
-      [0,0,1],
-      [1,1,1],
-      [1,0,0]
-  ],
-  [
-      [0,1,0],
-      [1,1,1],
-      [0,1,0]
-  ],
-  [
-      [0,1,0,0],
-      [1,1,1,1],
-      [0,0,0,0],
-      [0,0,0,0]
-  ],
-  [
-      [1,1,0],
-      [0,1,0],
-      [0,1,1]
-  ]
-]
-
-const pattern = [
-    [0,0,0,0,0],
-    [0,0,1,1,0],
-    [0,1,1,0,0],
-    [0,0,1,0,0],
-    [0,0,0,0,0]
-  ]
-
-const Tiles = ({ data }) => {
+const Tiles = () => {
   const id = useSelector((state) => state.tile.id);
   const group = useSelector((state) => state.tile.group);
-  const [list, setList] = useState([data[0]]);
+  const endNode = useSelector((state) => state.tile.endNode);
+  const [list, setList] = useState([POLYOMINOES[0]]);
   const [dragging, setDragging] = useState(false);
 
   const dispatch = useDispatch();
@@ -95,7 +21,7 @@ const Tiles = ({ data }) => {
 
   const handleSelect = (key) => {
     dispatch(changeGroup(key));
-    setList([data[key]])
+    setList([POLYOMINOES[key]])
   }
 
   const handleDragStart = (e, params) => {
@@ -109,7 +35,7 @@ const Tiles = ({ data }) => {
   };
 
   const handleDragEnd = () => {
-    console.log("drag end");
+    console.log("drag end", endNode);
     setDragging(false);
     dragNode.current.removeEventListener("dragend", handleDragEnd);
     dragItem.current = null;
@@ -117,7 +43,7 @@ const Tiles = ({ data }) => {
   };
 
   const handleDragEnter = (e, params) => {
-    console.log("drag start wthi group(", group, ") and id(", id, ")");
+    console.log("drag start with group(", group, ") and id(", id, ")");
     const currentItem = dragItem.current;
     if (e.target !== dragNode.current) {
       setList((oldList) => {
@@ -133,24 +59,25 @@ const Tiles = ({ data }) => {
     }
   };
 
-  const getStyles = (params) => {
-    const currentItem = dragItem.current;
-    if (
-      currentItem.grpI === params.grpI &&
-      currentItem.itemI === params.itemI
-    ) {
-      return classes.currentTile;
-    }
-    return classes.tile;
-  };
+  // const getStyles = (params) => {
+  //   const currentItem = dragItem.current;
+  //   if (
+  //     currentItem.grpI === params.grpI &&
+  //     currentItem.itemI === params.itemI
+  //   ) {
+  //     return classes.currentTile;
+  //   }
+  //   return classes.tile;
+  // };
 
   return (
-    <div>
+    <div >
       <Tabs 
+        style={{fontSize: '80%'}}
         defaultActiveKey={list[0].grpI} 
         onSelect={(key) => handleSelect(key)}
       >
-        {data.map((grp, grpI) => (
+        {POLYOMINOES.map((grp, grpI) => (
           <Tab
             key={grpI}
             eventKey={grpI}
@@ -158,7 +85,7 @@ const Tiles = ({ data }) => {
           />
         ))}
       </Tabs>
-      {/* {list.map((grp, grpI) => (
+      {list.map((grp, grpI) => (
         <ListGroup
           horizontal
           key={grp.title}
@@ -169,44 +96,22 @@ const Tiles = ({ data }) => {
               : null
           }
         >
-          {grp.items.map((item, itemI) => (
-            <ListGroup.Item
-              key={item}
-              draggable
-              onDragStart={(e) => handleDragStart(e, { grpI, itemI })}
-              onDragEnter={(e) =>
-                dragging ? handleDragEnter(e, { grpI, itemI }) : null
-              }
-              className={
-                dragging ? getStyles({ grpI, itemI }) : classes.tile
-              }
-            >
-              {item}
-            </ListGroup.Item>
-          ))}
+          <Row sm="auto">
+            {grp.items.map((item, itemI) => (
+              <div 
+                key={item}
+                draggable
+                onDragStart={(e) => handleDragStart(e, { grpI, itemI })}
+                onDragEnter={(e) =>
+                  dragging ? handleDragEnter(e, { grpI, itemI }) : null
+                }
+              >
+                <Cell tiles={grp.tiles[item]}></Cell> 
+              </div>
+            ))}
+          </Row>
         </ListGroup>
-      ))} */}
-      <ListGroup
-           horizontal
-          // key={"1"}
-          className={classes.tileGroup}
-          // onDragEnter={
-          //   dragging && !grp.items.length
-          //     ? (e) => handleDragEnter(e, { grpI, itmeI: 0 })
-          //     : null
-          // }
-        >
-        <Row sm="auto" >
-          {TETROMINOS.map((item, itemI) => (
-              <ListGroup.Item style={{padding: 1}}>
-                <div draggable>
-                  <Cell key={itemI} pattern={item} tiles={[item]}></Cell> 
-                </div>
-              </ListGroup.Item>
-          ))}
-        </Row>
-      </ListGroup>
-
+      ))}
     </div>
   );
 };

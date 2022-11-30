@@ -4,7 +4,8 @@ export const tileSlice = createSlice({
   name: 'tile',
   initialState: {
     id: 0,
-    group: 0
+    group: 0,
+    endNode: 0
   },
   reducers: {
     changeGroup: (state, action) => {
@@ -13,9 +14,12 @@ export const tileSlice = createSlice({
     changeTile: (state, action) => {
       state.id = action.payload
     },
+    changeEndNode: (state, action) => {
+      state.endNode = action.payload
+    },
   },
 })
 
-export const { changeGroup, changeTile } = tileSlice.actions
+export const { changeGroup, changeTile, changeEndNode } = tileSlice.actions
 
 export default tileSlice.reducer

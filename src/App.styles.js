@@ -6,7 +6,7 @@ const useStyles =  createUseStyles({
         flexDirection: 'column',
         width: '100%',
         height: '100%', 
-        justifyContent: 'center',
+        //justifyContent: 'center',
         alignItems: 'center'
     }
 })

@@ -5,17 +5,17 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Grid from "./Grid";
 import Tiles from "./Tiles";
 
-const Board = ({data}) => {
+const Board = () => {
   // const classes = useStyles();
   return (
     <div>
       <Container>
-      <Row>
-        <Grid />
-      </Row>
-      <Row>
-        <Tiles data={data} />
-      </Row>
+        <Row>
+          <Grid />
+        </Row>
+        <Row>
+          <Tiles />
+        </Row>
       </Container>
     </div>
   );
