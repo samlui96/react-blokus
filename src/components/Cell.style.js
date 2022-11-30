@@ -6,8 +6,9 @@ export default createUseStyles({
         display: 'grid',
         gridTemplateRows:'repeat('.concat(props.length, ', 1fr)'),
         gridTemplateColumns: 'repeat('.concat(props.length, ', 1fr)'),
-        width: '5vh',
-        height: '5vh', 
+        width: '8vh',
+        height: '8vh', 
+        pointerEvents: 'none'
         //outline: 'solid black',
         //margin: '1vh',
     }),
@@ -16,7 +17,8 @@ export default createUseStyles({
         background: 'white',
         transition: 'all 100ms linear',
         position: 'relative',
-        margin: '0.06vh',
+        pointerEvents: 'none'
+        //margin: '0.05vh',
     }
 })
 

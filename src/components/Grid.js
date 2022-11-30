@@ -15,6 +15,9 @@ const offCell = {
 const initialCells = Array.from({ length: 400 }, () => offCell);
 
 const Grid = () => {
+  // const id = useSelector((state) => state.tile.id);
+  // const group = useSelector((state) => state.tile.group);
+  // const endNode = useSelector((state) => state.tile.endNode);
   const [cells, setCells] = useState(initialCells);
   const [target, setTarget] = useState(null);
   const [flag, setFlag] = useState(true);

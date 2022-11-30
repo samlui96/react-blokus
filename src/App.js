@@ -1,7 +1,7 @@
 import React from 'react';
 import Board from './components/Board'
 import useStyles from './App.styles';
-import tetrominos from './redux/constant'
+import tetrominos from './components/constant'
 
 const data = [
   {title:'group 1', items: ['1','2','3','4','5']},
