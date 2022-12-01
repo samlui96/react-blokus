@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 export const tileSlice = createSlice({
   name: 'tile',
   initialState: {
-    id: 0,
+    id: 'I',
     group: 0,
     endNode: 0
   },
