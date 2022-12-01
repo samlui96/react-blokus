@@ -1,16 +1,13 @@
 import React, { useState, useRef } from "react";
 import useStyles from "./Tiles.styles";
-import { useSelector, useDispatch } from "react-redux";
-import { changeGroup, changeTile, changeEndNode } from "../redux/tileSlice";
+import { useDispatch } from "react-redux";
+import { changeGroup, changeTile } from "../redux/tileSlice";
 import { ListGroup, Tabs, Tab, Row } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Cell from "./Cell"
 import POLYOMINOES from './constant'
 
-const Tiles = () => {
-  const id = useSelector((state) => state.tile.id);
-  const group = useSelector((state) => state.tile.group);
-  const endNode = useSelector((state) => state.tile.endNode);
+const Tiles = ( {tileState} ) => {
   const [list, setList] = useState([POLYOMINOES[0]]);
   const [dragging, setDragging] = useState(false);
 
@@ -35,7 +32,6 @@ const Tiles = () => {
   };
 
   const handleDragEnd = () => {
-    console.log("drag end", endNode);
     setDragging(false);
     dragNode.current.removeEventListener("dragend", handleDragEnd);
     dragItem.current = null;
@@ -43,7 +39,7 @@ const Tiles = () => {
   };
 
   const handleDragEnter = (e, params) => {
-    console.log("drag start with group(", group, ") and id(", id, ")");
+    // console.log("drag start with group(", tileState.group, ") and id(", tileState.id, ")");
     const currentItem = dragItem.current;
     if (e.target !== dragNode.current) {
       setList((oldList) => {
@@ -58,17 +54,6 @@ const Tiles = () => {
       });
     }
   };
-
-  // const getStyles = (params) => {
-  //   const currentItem = dragItem.current;
-  //   if (
-  //     currentItem.grpI === params.grpI &&
-  //     currentItem.itemI === params.itemI
-  //   ) {
-  //     return classes.currentTile;
-  //   }
-  //   return classes.tile;
-  // };
 
   return (
     <div >
