@@ -5,7 +5,8 @@ export const tileSlice = createSlice({
   initialState: {
     id: 'I',
     group: 0,
-    endNode: 0
+    endNode: 0,
+    dragging: false
   },
   reducers: {
     changeGroup: (state, action) => {
@@ -17,9 +18,12 @@ export const tileSlice = createSlice({
     changeEndNode: (state, action) => {
       state.endNode = action.payload
     },
+    changeDragging: (state, action) => {
+      state.dragging = action.payload
+    },
   },
 })
 
-export const { changeGroup, changeTile, changeEndNode } = tileSlice.actions
+export const { changeGroup, changeTile, changeEndNode, changeDragging } = tileSlice.actions
 
 export default tileSlice.reducer

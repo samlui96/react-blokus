@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import useStyles from "./Grid.styles";
 import { useDispatch } from "react-redux";
 import { changeEndNode } from "../redux/tileSlice";
@@ -31,20 +31,18 @@ const initialCells = Array.from({ length: 400 }, () => offCell);
 
 const Grid = ( {tileState} ) => {
   const [cells, setCells] = useState(initialCells);
-  const [preCells, setPreCells] = useState(true);
-  const [flag, setFlag] = useState(true);
+  const [preCell, setPreCell] = useState();
 
   const classes = useStyles();
   const dispatch = useDispatch();
-  
-  useEffect(() => {
-  }, [flag])
+
 
   const tileInBoard = (i) => {
     const tileMatirx = POLYOMINOES[tileState.group].tiles[tileState.id]
     let output = []
     let rowOperator = 0
     let colOperator = 0
+    let isEndofLine = 0
     tileMatirx.map((row, rowI) => {
       rowOperator = 
         rowI === 2 
@@ -53,6 +51,12 @@ const Grid = ( {tileState} ) => {
             ? (2-rowI)*20*(-1)
             : (rowI-2)*20
       row.map((col, colI) => {
+        isEndofLine = 
+          colI === 2 
+          ? 0 
+          : colI <= 1
+            ? i % 20
+            : 20 - i % 20 - 1
         colOperator = 
           colI === 2 
             ? 0 
@@ -60,8 +64,14 @@ const Grid = ( {tileState} ) => {
               ? (2-colI)*(-1)
               : colI-2
         if (col === 1 && i+rowOperator+colOperator <= 399 && i+rowOperator+colOperator >= 0) {
-          output.push(i+rowOperator+colOperator)
-        }
+          if (colI >= 2) {
+            if (isEndofLine - colOperator >= 0)
+              output.push(i+rowOperator+colOperator)
+          } else {
+            if (colOperator + isEndofLine  >= 0)
+              output.push(i+rowOperator+colOperator)
+          }
+        }    
       })
     })
     return output
@@ -84,42 +94,37 @@ const Grid = ( {tileState} ) => {
   };
 
   const updateTarget = (i) => (e) => {
-    // setCells((oldCells) => {
-    //   oldCells[i] = oldCells[i].lock ? oldCells[i] : onCell
-    //   return oldCells;
-    // }) 
+    dispatch(changeEndNode(i))
     let curTiles = tileInBoard(i)
     setCells((oldCells) => {
       curTiles.map((item) => {
-       oldCells[item] = oldCells[item].lock ? oldCells[item] : onCell
+      oldCells[item] = oldCells[item].lock ? oldCells[item] : onCell
       })
       return oldCells;
     }) 
-    setPreCells(curTiles)
-    console.log(i, 'for update')
   }
 
   const clearTarget = (i) => (e) => {
-    // dispatch(changeEndNode(i))
-    // setCells((oldCells) => {
-    //   //let newCells = JSON.parse(JSON.stringify(oldCells));
-    //   oldCells[i] = oldCells[i].lock ? oldCells[i] : offCell
-    //   return oldCells;
-    // }) 
-    // setFlag(!flag)
-    dispatch(changeEndNode(i))
-    console.log(i, 'for clear')
-    let preTiles = tileInBoard(i)
-
+    let preTiles = tileInBoard(tileState.endNode)
+    let currentTiles = tileInBoard(i)
+    // console.log('precell: ', preCell, '; i: ', i, '; endNode: ', tileState.endNode, )
     setCells((oldCells) => {
-      //oldCells[i] = oldCells[i].lock || oldCells[i]  ? oldCells[i] : offCell
-      preTiles.map((item) => {
-         oldCells[item] = oldCells[item].lock || oldCells[item] === onCell ? oldCells[item] : offCell
-      })
+      if ((tileState.endNode !== preCell && tileState.endNode !== i) 
+          || (tileState.endNode === preCell)) {
+        currentTiles.filter(dif => !preTiles.includes(dif)).map((item) => {
+        oldCells[item] = oldCells[item].lock ? oldCells[item] : offCell
+        })
+      }
+      else {
+        currentTiles.map((item) => {
+          oldCells[item] = oldCells[item].lock ? oldCells[item] : offCell
+          })
+      }
       return oldCells;
     }) 
-    setFlag(!flag)
+    setPreCell(i)
   }
+
   return (
     <div>
         <div className={classes.grid}>
