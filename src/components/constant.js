@@ -165,7 +165,7 @@ const POLYOMINOES = [
   },
   {
     title: "MONOMINO",
-    items: ["I",],
+    items: ["I"],
     tiles: {
       I: [
         [0, 0, 0, 0, 0],

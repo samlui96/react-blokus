@@ -18,11 +18,11 @@ export default createUseStyles({
         cursor: 'pointer',
         outline: 'solid black',
         background: 'white',
-        transition: 'all 100ms linear',
-        '&:hover':{
-            transform: 'scale(1.2)',
-            backgroundColor: 'red'
-        }
+        // transition: 'all 100ms linear',
+        // '&:hover':{
+        //     transform: 'scale(1.2)',
+        //     backgroundColor: 'red'
+        // }
     }
 })
 
