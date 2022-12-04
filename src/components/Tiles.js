@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import useStyles from "./Tiles.styles";
 import { useDispatch } from "react-redux";
-import { changeGroup, changeTile } from "../redux/tileSlice";
+import { changeGroup, changeTile, changeDragging } from "../redux/tileSlice";
 import { ListGroup, Tabs, Tab, Row } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Cell from "./Cell"
@@ -9,7 +9,6 @@ import POLYOMINOES from './constant'
 
 const Tiles = ( {tileState} ) => {
   const [list, setList] = useState([POLYOMINOES[0]]);
-  const [dragging, setDragging] = useState(false);
 
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -27,12 +26,12 @@ const Tiles = ( {tileState} ) => {
     dragNode.current = e.target;
     dragNode.current.addEventListener("dragend", handleDragEnd);
     setTimeout(() => {
-      setDragging(true);
+      dispatch(changeDragging(true))
     }, 0);
   };
 
   const handleDragEnd = () => {
-    setDragging(false);
+    dispatch(changeDragging(false))
     dragNode.current.removeEventListener("dragend", handleDragEnd);
     dragItem.current = null;
     dragNode.current = null;
@@ -76,7 +75,7 @@ const Tiles = ( {tileState} ) => {
           key={grp.title}
           className={classes.tileGroup}
           onDragEnter={
-            dragging && !grp.items.length
+            tileState.dragging && !grp.items.length
               ? (e) => handleDragEnter(e, { grpI, itmeI: 0 })
               : null
           }
@@ -88,7 +87,7 @@ const Tiles = ( {tileState} ) => {
                 draggable
                 onDragStart={(e) => handleDragStart(e, { grpI, itemI })}
                 onDragEnter={(e) =>
-                  dragging ? handleDragEnter(e, { grpI, itemI }) : null
+                  tileState.dragging ? handleDragEnter(e, { grpI, itemI }) : null
                 }
               >
                 <Cell tiles={grp.tiles[item]}></Cell> 

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import useStyles from "./Grid.styles";
 import { useDispatch } from "react-redux";
 import { changeEndNode } from "../redux/tileSlice";
@@ -33,12 +33,13 @@ const Grid = ( {tileState} ) => {
   const [cells, setCells] = useState(initialCells);
   const [lastCell, setLastCell] = useState();
   const [existCells, setExistCells] = useState([]);
-  const [isAllow, setIsAllow] = useState(true);
 
   const classes = useStyles();
   const dispatch = useDispatch();
+  
+  useEffect(() => {});
 
-  const tileInBoard = (i) => {
+  const tilesInBoard = (i) => {
     const tileMatirx = POLYOMINOES[tileState.group].tiles[tileState.id]
     let output = []
     let rowOperator = 0
@@ -78,79 +79,132 @@ const Grid = ( {tileState} ) => {
     return output
   }
 
-  const updateCell = (i) => (e) => {
-  // e.preventDefault()
-  if (i === tileState.endNode) {
-    setCells(
-      cells.map((cell, cellIndex) => {
-        if (cellIndex === tileInBoard(i).find(item => item === cellIndex)) {
-          return lockCell;
-        }
-        return cell;
-      })
-    );
-    dispatch(changeEndNode())
+  const tilesNearBy = (tiles) => {
+  /**
+   * determine the filter array
+   * filter[0]: isInTopLine => i <= 19 
+   * filter[1]: isInBottomLine => i >= 380 && i <= 399
+   * filter[2]: isInLeftLine => i % 20 === 0
+   * filter[3]: isRightLine => (i + 1) % 20 === 0 
+   */
+    let output = []
+    tiles.forEach((til) => {
+      let filter = [(til <= 19), til >= 380 && til <= 399, til % 20 === 0, (til + 1) % 20 === 0]
+      // initialize the output, add qualified cell to ouput
+      let temp = [til-20, til+20 ,til-1, til+1]
+      if (filter.length > 0) {
+        filter.forEach((fil, filIndex) => {
+            if (!fil && !tiles.includes(temp[filIndex])) 
+              output.push(temp[filIndex])
+        })
+      }
+    }) 
+    return output
   }
+
+  const updateCell = (i) => (e) => {
+    if (i === tileState.endNode && cells[i] === onCell) {
+      setCells(
+        cells.map((cell, cellIndex) => {
+          if (cellIndex === tilesInBoard(i).find(item => item === cellIndex)) {
+            return lockCell;
+          }
+          return cell;
+        })
+      );
+      dispatch(changeEndNode())
+    }
+  };
+
+  const updateDefaultCell = (i) => (e) => {
+    e.preventDefault()
+    cells[i] = lockCell
+    setLastCell(i)
+    setLastCell(i)
   };
   
   const updateTarget = (i) => (e) => {
-    // clear the exist cells
-    if (existCells.length > 0) {
-      setCells((oldCells) => {
-        existCells.forEach((item) => {
-          oldCells[item] = oldCells[item].lock ? oldCells[item] : offCell
-          })
-        return oldCells;
+    if (tileState.dragging) {
+      // 1. clear the exist cells for dragging again
+      if (existCells.length > 0) {
+        setCells((oldCells) => {
+          existCells.forEach((item) => {
+            oldCells[item] = oldCells[item].lock ? oldCells[item] : offCell
+            })
+          return oldCells;
+        })
+        setExistCells([])
+      }
+      // 2. initialized variables
+      let curTiles = tilesInBoard(i)
+      let surTiles = tilesNearBy(curTiles)
+      let cornTiles = []
+      let customCell = onCell
+      dispatch(changeEndNode(i))
+      // 3. reset the lastcell for end dragging
+      if ((i === tileState.endNode || lastCell === tileState.endNode))
+        setLastCell(undefined)
+      // 4. check corner to corner rules
+      curTiles.forEach((item) => {
+        // for top left cocner
+        if (surTiles.includes(item-20) && surTiles.includes(item-1) && cells[item-21] === lockCell) 
+          cornTiles.push(item-21)
+        // for top right cocner
+        if (surTiles.includes(item-20) && surTiles.includes(item+1) && cells[item-19] === lockCell) 
+          cornTiles.push(item-19)
+        // for bottom left cocner
+        if (surTiles.includes(item+20) && surTiles.includes(item-1) && cells[item+19] === lockCell) 
+          cornTiles.push(item+19)
+        // for bottom right cocner
+        if (surTiles.includes(item+20) && surTiles.includes(item+1) && cells[item+21] === lockCell) 
+          cornTiles.push(item+21)
       })
-      setExistCells([])
-    }
-    // update the dragging cells 
-    if ((i === tileState.endNode || lastCell === tileState.endNode))
-      setLastCell(undefined)
-    dispatch(changeEndNode(i))
-    let curTiles = tileInBoard(i)
-    let customCell
-    setCells((oldCells) => {
-        if (curTiles.length === 5) {
-          customCell = onCell
-          setIsAllow(curTiles.length === 5)
-        } else {
-          customCell = wrongCell
-          setIsAllow(false)
-        }  
-        curTiles.forEach((item) => {
+      // 5. update the custom cells by checking rules
+      if (curTiles.length == 5-tileState.group && cornTiles.length > 0)
+        surTiles.forEach((item) => {
+          if (cells[item].lock && customCell === onCell) {
+            customCell = wrongCell
+          }
+        })
+      else customCell = wrongCell
+      // 6. update tiles
+      setCells((oldCells) => {
+          curTiles.forEach((item) => {
             oldCells[item] = oldCells[item].lock 
               ? oldCells[item] 
               : customCell
           })
-      return oldCells;
-    })
+        return oldCells;
+      })
+    }
   }
 
   const clearTarget = (i) => (e) => {
-    let currentTiles = tileInBoard(i)
-    //console.log('endNode: ', tileState.endNode, '; i ', i, '; lastCell ', lastCell)
-    // set exist cells if mouseup
-    if ((e.clientX === 0 && e.clientY === 0) && isAllow) {
-      setExistCells(currentTiles)
-    } 
-    // clear the last cells
-    else {  
-      let preTiles = tileInBoard(tileState.endNode)
-      setCells((oldCells) => {
-        if ((tileState.endNode !== lastCell && tileState.endNode !== i) 
-            || (tileState.endNode === lastCell)) {
-          currentTiles.filter(dif => !preTiles.includes(dif)).forEach((item) => {
-            oldCells[item] = oldCells[item].lock ? oldCells[item] : offCell
-          })
-        } else {
-          currentTiles.forEach((item) => {
-            oldCells[item] = oldCells[item].lock ? oldCells[item] : offCell
+    if (tileState.dragging) {
+      let currentTiles = tilesInBoard(i)
+      // console.log('endNode: ', tileState.endNode, '; i ', i, '; lastCell ', lastCell)
+      // set exist cells if mouseup
+      if ((e.clientX === 0 && e.clientY === 0)) {
+        setExistCells(currentTiles)
+      } 
+      // clear the last cells
+      else {  
+        let preTiles = tilesInBoard(tileState.endNode)
+        setCells((oldCells) => {
+          if ((tileState.endNode !== lastCell && tileState.endNode !== i) 
+              || (tileState.endNode === lastCell)) {
+            currentTiles.filter(dif => !preTiles.includes(dif)).forEach((item) => {
+              oldCells[item] = oldCells[item].lock ? oldCells[item] : offCell
             })
-        }
-        return oldCells;
-      }) 
-      setLastCell(i)
+          } else {
+            currentTiles.forEach((item) => {
+              oldCells[item] = oldCells[item].lock ? oldCells[item] : offCell
+              })
+          }
+          return oldCells;
+        }) 
+        setLastCell(i)
+      }
     }
   }
 
@@ -163,6 +217,7 @@ const Grid = ( {tileState} ) => {
               style={{ background: cell.on ? cell.color : "#FFFFFF" }}
               className={classes.cell}
               onClick={updateCell(i)}
+              onContextMenu={updateDefaultCell(i)}
               onDragEnter={updateTarget(i)}
               onDragLeave={clearTarget(i)}
             ></div>
