@@ -160,7 +160,7 @@ const Grid = ( {tileState} ) => {
           cornTiles.push(item+21)
       })
       // 5. update the custom cells by checking rules
-      if (curTiles.length == 5-tileState.group && cornTiles.length > 0)
+      if (curTiles.length === 5-tileState.group && cornTiles.length > 0)
         surTiles.forEach((item) => {
           if (cells[item].lock && customCell === onCell) {
             customCell = wrongCell
@@ -199,7 +199,7 @@ const Grid = ( {tileState} ) => {
           } else {
             currentTiles.forEach((item) => {
               oldCells[item] = oldCells[item].lock ? oldCells[item] : offCell
-              })
+            })
           }
           return oldCells;
         }) 
