@@ -55,9 +55,9 @@ const Tiles = ( {tileState} ) => {
   };
 
   return (
-    <div >
+    <div>
       <Tabs 
-        style={{fontSize: '80%'}}
+        style={{maxWidth: '70vh', maxHeight: '10vh', overflow: 'auto', fontSize: '1.5vmin'}}
         defaultActiveKey={list[0].grpI} 
         onSelect={(key) => handleSelect(key)}
       >
@@ -66,7 +66,7 @@ const Tiles = ( {tileState} ) => {
             key={grpI}
             eventKey={grpI}
             title={grp.title}
-          />
+            />
         ))}
       </Tabs>
       {list.map((grp, grpI) => (
@@ -80,9 +80,11 @@ const Tiles = ( {tileState} ) => {
               : null
           }
         >
-          <Row sm="auto">
+          <Row 
+            style={{ marginLeft: 0}}>
             {grp.items.map((item, itemI) => (
               <div 
+                style={{maxWidth: '70vh', maxHeight: '10vh', width: '10vh', padding: 0}}
                 key={item}
                 draggable
                 onDragStart={(e) => handleDragStart(e, { grpI, itemI })}
