@@ -1,13 +1,5 @@
-<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/react-blockus/pull/73 -->
-<a name="readme-top"></a>
-<!--
-*** Thanks for checking out the react-blockus. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
 
+<a name="readme-top"></a>
 
 
 <!-- PROJECT SHIELDS -->
@@ -31,9 +23,9 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <!-- <a href="https://github.com/samlui96/react-blockus">
+  <a href="https://github.com/samlui96/react-blockus">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a> -->
+  </a>
 
   <h3 align="center">Blockus Simulation</h3>
 
@@ -84,18 +76,20 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+<!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
+[product-screenshot]
 
-There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
+The project is to simulate the board game called _Blokus_. Blokus is played on 20x20 board and 84 game tiles (4 set of 21 shapes tiles with diffenet colors). The objective is to place all your tiles and survive as long as possible.
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should implement DRY principles to the rest of your life :smile:
+The satdnard rules of the game are as follow:
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
+* Order of play is based on the color of pieces: blue, yellow, red, green.
+* The first piece played of each color is placed in one of the board's four corners. Each new piece played must be placed so that it touches at least one piece of the same color, with only corner-to-corner contact allowed — edges cannot touch. Edge-to-edge contact between pieces of different colors, however, is allowed.
+* When a player cannot place a piece, they pass, and play continues as normal. The game ends when no one can place any more pieces
 
-Use the `BLANK_README.md` to get started.
+Once the game ends, each player counts every square on the piece(s) that they did NOT place on the board, each counting as a negative (−1) point (e.g. an unplayed tetromino is worth −4 points). A player who played all of their pieces is awarded a 15-point bonus. If the last piece played was a monomino, provided that all pieces of own color have been played, the player is awarded a 20-point bonus instead. The player with the highest score wins.
+
+The project is made by React.js and is still on development. The current state is on _State 1_. To read more, please go to _Roadmap_ section.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -152,7 +146,7 @@ _Below is an example of how you can instruct your audience on installing and set
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/samlui96/react-blockus.git
    ```
 2. Install NPM packages
    ```sh
@@ -170,10 +164,19 @@ _Below is an example of how you can instruct your audience on installing and set
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Usage will be uploaded soon. Sorry for inconvenience.
-<!-- Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+[product-usage1]
+Drag the target and drop it to the board. The color will be changed on time. Red color means it is invalid dropping place and Grey color means it is valid dropping place.
 
-_For more examples, please refer to the [Documentation](https://example.com)_ -->
+[product-usage2]
+Click the same place where it dropped to confirm the move. (preventing the dropping mistakes.)
+
+[product-usage3]
+Blue color implies the move is compelete.
+
+[product-usage4]
+Click the Tap section to change the tile group.
+
+<!-- _For more examples, please refer to the [Documentation](https://example.com)_ -->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -232,7 +235,7 @@ License will be uploaded soon.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [Sam Lui](https://www.linkedin.com/in/paksumlui/) - luipaksum@hotmail.com
+[Sam Lui](https://www.linkedin.com/in/paksumlui/) - luipaksum@hotmail.com
 
 Project Link: [https://github.com/samlui96/react-blockus](https://github.com/samlui96/react-blockus)
 
@@ -245,14 +248,12 @@ Project Link: [https://github.com/samlui96/react-blockus](https://github.com/sam
 
 Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
 
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
-* [Malven's Grid Cheatsheet](https://grid.malven.co/)
-* [Img Shields](https://shields.io)
 * [GitHub Pages](https://pages.github.com)
-* [Font Awesome](https://fontawesome.com)
-* [React Icons](https://react-icons.github.io/react-icons/search)
+* [React Redux](https://react-redux.js.org/)
+* [JSS integration with React](https://cssinjs.org/react-jss/?v=v10.9.2)
+* [React Bootstrap](https://react-bootstrap.github.io/)
+* [Drag And Drop](https://github.com/asatraitis/react-hooks-dragndrop)
+* [Blokus](https://web.archive.org/web/20071227074218/http://www.blokus.com/en/regles_plateau.html)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -273,6 +274,10 @@ Use this space to list resources you find helpful and would like to give credit 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/samlui96
 [product-screenshot]: images/screenshot.png
+[product-usage1]: images/usage1.png
+[product-usage2]: images/usage2.png
+[product-usage3]: images/usage3.png
+[product-usage4]: images/usage4.png
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
