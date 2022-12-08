@@ -77,7 +77,7 @@
 ## About The Project
 
 <!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
-[product-screenshot]
+[![Blokus Screen Shot][product-screenshot]]([product-screenshot])
 
 The project is to simulate the board game called _Blokus_. Blokus is played on 20x20 board and 84 game tiles (4 set of 21 shapes tiles with diffenet colors). The objective is to place all your tiles and survive as long as possible.
 
@@ -97,7 +97,7 @@ The project is made by React.js and is still on development. The current state i
 
 ### Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+<!-- This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples. -->
 
 <!-- * [![Next][Next.js]][Next-url] -->
 * [![React][React.js]][React-url]
@@ -115,7 +115,7 @@ This section should list any major frameworks/libraries used to bootstrap your p
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
+<!-- This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
@@ -124,7 +124,7 @@ This is an example of how to list things you need to use the software and how to
 * npm
   ```sh
   npm install npm@latest -g
-  ```
+  ``` -->
 
 ### Installation
 
@@ -164,16 +164,19 @@ _Below is an example of how you can instruct your audience on installing and set
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-[product-usage1]
+[![Usage Dscp 0][product-usage0]]([product-usage0])
+To begin with, right click any tile as starting point. It is temporary function and is for test purpose.
+
+[![Usage Dscp 1][product-usage1]]([product-usage1])
 Drag the target and drop it to the board. The color will be changed on time. Red color means it is invalid dropping place and Grey color means it is valid dropping place.
 
-[product-usage2]
+[![Usage Dscp 2][product-usage2]]([product-usage2])
 Click the same place where it dropped to confirm the move. (preventing the dropping mistakes.)
 
-[product-usage3]
+[![Usage Dscp 3][product-usage3]]([product-usage3])
 Blue color implies the move is compelete.
 
-[product-usage4]
+[![Usage Dscp 4][product-usage4]]([product-usage4])
 Click the Tap section to change the tile group.
 
 <!-- _For more examples, please refer to the [Documentation](https://example.com)_ -->
@@ -214,9 +217,9 @@ Don't forget to give the project a star! Thanks again!
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b YOUR_BRANCH_NAME origin/DEV`)
 3. Add your Change (`git add --all`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin YOUR_BRANCH_NAME:YOUR_BRANCH_NAME`)
-5. Open a Pull Request
+4. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+5. Push to the Branch (`git push origin YOUR_BRANCH_NAME:YOUR_BRANCH_NAME`)
+6. Open a Pull Request
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -274,6 +277,7 @@ Use this space to list resources you find helpful and would like to give credit 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/samlui96
 [product-screenshot]: images/screenshot.png
+[product-usage0]: images/usage0.png
 [product-usage1]: images/usage1.png
 [product-usage2]: images/usage2.png
 [product-usage3]: images/usage3.png
