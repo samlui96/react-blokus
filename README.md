@@ -164,19 +164,29 @@ _Below is an example of how you can instruct your audience on installing and set
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-[![Usage Dscp 0][product-usage0]]([product-usage0])
+<a href="https://github.com/samlui96/react-blockus">
+  <img src="images/usage0.png" alt="Logo" width="400" height="160">
+</a>
 To begin with, right click any tile as starting point. It is temporary function and is for test purpose.
 
-[![Usage Dscp 1][product-usage1]]([product-usage1])
+<a href="https://github.com/samlui96/react-blockus">
+    <img src="images/usage1.png" alt="Logo" width="400" height="160">
+</a>
 Drag the target and drop it to the board. The color will be changed on time. Red color means it is invalid dropping place and Grey color means it is valid dropping place.
 
-[![Usage Dscp 2][product-usage2]]([product-usage2])
+<a href="https://github.com/samlui96/react-blockus">
+    <img src="images/usage2.png" alt="Logo" width="400" height="160">
+</a>
 Click the same place where it dropped to confirm the move. (preventing the dropping mistakes.)
 
-[![Usage Dscp 3][product-usage3]]([product-usage3])
+<a href="https://github.com/samlui96/react-blockus">
+    <img src="images/usage3.png" alt="Logo" width="400" height="160">
+</a>
 Blue color implies the move is compelete.
 
-[![Usage Dscp 4][product-usage4]]([product-usage4])
+<a href="https://github.com/samlui96/react-blockus">
+    <img src="images/usage4.png" alt="Logo" width="400" height="160">
+</a>
 Click the Tap section to change the tile group.
 
 <!-- _For more examples, please refer to the [Documentation](https://example.com)_ -->

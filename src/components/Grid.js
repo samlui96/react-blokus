@@ -15,11 +15,11 @@ const offCell = {
   color: "#000000"
 };
 
-const lockCell = {
-  on: true,
-  lock: true,
-  color: "#030FFC"
-};
+// const lockCell = {
+//   on: true,
+//   lock: true,
+//   color: "#030FFC"
+// };
 
 const wrongCell = {
   on: true,
@@ -29,7 +29,7 @@ const wrongCell = {
 
 const initialCells = Array.from({ length: 400 }, () => offCell);
 
-const Grid = ( {tileState} ) => {
+const Grid = ( {playerState, tileState} ) => {
   const [cells, setCells] = useState(initialCells);
   const [lastCell, setLastCell] = useState();
   const [existCells, setExistCells] = useState([]);
@@ -40,7 +40,7 @@ const Grid = ( {tileState} ) => {
   useEffect(() => {});
 
   const tilesInBoard = (i) => {
-    const tileMatirx = POLYOMINOES[tileState.group].tiles[tileState.id]
+    const tileMatirx = playerState.tiles[playerState.curPlayer][tileState.group].tiles[tileState.id]
     let output = []
     let rowOperator = 0
     let colOperator = 0
@@ -107,7 +107,11 @@ const Grid = ( {tileState} ) => {
       setCells(
         cells.map((cell, cellIndex) => {
           if (cellIndex === tilesInBoard(i).find(item => item === cellIndex)) {
-            return lockCell;
+            return {
+              on: true,
+              lock: true,
+              color: playerState.color[playerState.curPlayer]
+            };
           }
           return cell;
         })
@@ -118,7 +122,11 @@ const Grid = ( {tileState} ) => {
 
   const updateDefaultCell = (i) => (e) => {
     e.preventDefault()
-    cells[i] = lockCell
+    cells[i] = {
+      on: true,
+      lock: true,
+      color: playerState.color[playerState.curPlayer]
+    }
     setLastCell(i)
     setLastCell(i)
   };
@@ -147,16 +155,16 @@ const Grid = ( {tileState} ) => {
       // 4. check corner to corner rules
       curTiles.forEach((item) => {
         // for top left cocner
-        if (surTiles.includes(item-20) && surTiles.includes(item-1) && cells[item-21] === lockCell) 
+        if (surTiles.includes(item-20) && surTiles.includes(item-1) && cells[item-21].color === playerState.color[playerState.curPlayer]) 
           cornTiles.push(item-21)
         // for top right cocner
-        if (surTiles.includes(item-20) && surTiles.includes(item+1) && cells[item-19] === lockCell) 
+        if (surTiles.includes(item-20) && surTiles.includes(item+1) && cells[item-19].color === playerState.color[playerState.curPlayer]) 
           cornTiles.push(item-19)
         // for bottom left cocner
-        if (surTiles.includes(item+20) && surTiles.includes(item-1) && cells[item+19] === lockCell) 
+        if (surTiles.includes(item+20) && surTiles.includes(item-1) && cells[item+19].color === playerState.color[playerState.curPlayer]) 
           cornTiles.push(item+19)
         // for bottom right cocner
-        if (surTiles.includes(item+20) && surTiles.includes(item+1) && cells[item+21] === lockCell) 
+        if (surTiles.includes(item+20) && surTiles.includes(item+1) && cells[item+21].color === playerState.color[playerState.curPlayer]) 
           cornTiles.push(item+21)
       })
       // 5. update the custom cells by checking rules
