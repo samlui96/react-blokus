@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
+import POLYOMINOES from '../components/constant'
 
 export const playerSlice = createSlice({
   name: "player",
   initialState: {
-    curPlayer: 0,
+    curPlayer: 3,
     color: ["blue", "yellow", "green", "orange"],
-    tiles: "",
+    tiles: Array.from({ length: 4 }, () => POLYOMINOES),
     start: [false, false, false, false],
     end: [false, false, false, false],
     score: [0, 0, 0, 0],
@@ -24,7 +25,7 @@ export const playerSlice = createSlice({
       state.end = action.payload;
     },
     changePlayerScore: (state, action) => {
-        state.score = action.payload;
+      state.score = action.payload;
     },
   },
 });

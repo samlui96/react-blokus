@@ -5,10 +5,9 @@ import { changeGroup, changeTile, changeDragging } from "../redux/tileSlice";
 import { ListGroup, Tabs, Tab, Row } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Cell from "./Cell"
-import POLYOMINOES from './constant'
 
-const Tiles = ( {tileState} ) => {
-  const [list, setList] = useState([POLYOMINOES[0]]);
+const Tiles = ( {playerState, tileState} ) => {
+  const [list, setList] = useState([playerState.tiles[playerState.curPlayer][0]]);
 
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -17,7 +16,7 @@ const Tiles = ( {tileState} ) => {
 
   const handleSelect = (key) => {
     dispatch(changeGroup(key));
-    setList([POLYOMINOES[key]])
+    setList([playerState.tiles[playerState.curPlayer][key]])
   }
 
   const handleDragStart = (e, params) => {
@@ -61,7 +60,7 @@ const Tiles = ( {tileState} ) => {
         defaultActiveKey={list[0].grpI} 
         onSelect={(key) => handleSelect(key)}
       >
-        {POLYOMINOES.map((grp, grpI) => (
+        {playerState.tiles[playerState.curPlayer].map((grp, grpI) => (
           <Tab
             key={grpI}
             eventKey={grpI}
@@ -92,7 +91,7 @@ const Tiles = ( {tileState} ) => {
                   tileState.dragging ? handleDragEnter(e, { grpI, itemI }) : null
                 }
               >
-                <Cell tiles={grp.tiles[item]}></Cell> 
+                <Cell tiles={grp.tiles[item]} color={playerState.color[playerState.curPlayer]}></Cell> 
               </div>
             ))}
           </Row>

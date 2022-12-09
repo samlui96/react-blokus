@@ -8,15 +8,16 @@ import Tiles from "./Tiles";
 // import POLYOMINOES from './constant'
 
 const Board = () => {
-  const state = useSelector(state => state.tile)
+  const tileState = useSelector(state => state.tile)
+  const playerState = useSelector(state => state.player)
 
   return (
     <div>
         <Row>
-          <Grid tileState={state} />
+          <Grid playerState={playerState} tileState={tileState} />
         </Row>
         <Row>
-          <Tiles tileState={state}/>
+          <Tiles playerState={playerState} tileState={tileState}/>
         </Row>
     </div>
   );
