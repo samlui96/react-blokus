@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import useStyles from "./Grid.styles";
 import { useDispatch } from "react-redux";
 import { changeEndNode } from "../redux/tileSlice";
+import { changePlayer } from "../redux/playerSlice";
 import POLYOMINOES from './constant'
 
 const onCell = {
@@ -117,11 +118,18 @@ const Grid = ( {playerState, tileState} ) => {
         })
       );
       dispatch(changeEndNode())
+      //dispatch(changeTile())
+      //dispatch(changePlayer(playerState.curPlayer < 3 ? playerState.curPlayer + 1 : 0))
     }
   };
 
   const updateDefaultCell = (i) => (e) => {
     e.preventDefault()
+    // console.log(playerState.tiles[playerState.curPlayer])
+    // let test = playerState.tiles[playerState.curPlayer]
+    // console.log(test[tileState.group].tiles)
+    // delete test[tileState.group].tiles[tileState.id]
+    // let obj = test[tileState.group].tiles
     cells[i] = {
       on: true,
       lock: true,
