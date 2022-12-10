@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import useStyles from "./Tiles.styles";
 import { useDispatch } from "react-redux";
-import { changeGroup, changeTile, changeDragging } from "../redux/tileSlice";
+import { changeGroup, changeTile, changeEndNode, changeDragging } from "../redux/tileSlice";
 import { ListGroup, Tabs, Tab, Row } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Cell from "./Cell"
@@ -16,7 +16,8 @@ const Tiles = ( {playerState, tileState} ) => {
 
   const handleSelect = (key) => {
     dispatch(changeGroup(key));
-    setList([playerState.tiles[playerState.curPlayer][key]])
+    dispatch(changeEndNode());
+    setList([playerState.tiles[playerState.curPlayer][key]]);
   }
 
   const handleDragStart = (e, params) => {
@@ -25,7 +26,7 @@ const Tiles = ( {playerState, tileState} ) => {
     dragNode.current = e.target;
     dragNode.current.addEventListener("dragend", handleDragEnd);
     setTimeout(() => {
-      dispatch(changeDragging(true))
+      dispatch(changeDragging(true));
     }, 0);
   };
 
@@ -56,7 +57,7 @@ const Tiles = ( {playerState, tileState} ) => {
   return (
     <div>
       <Tabs 
-        style={{maxWidth: '70vh', maxHeight: '10vh', overflow: 'auto', fontSize: '1.5vmin'}}
+        style={{maxWidth: '80vh', maxHeight: '10vh', overflow: 'auto', fontSize: '1.5vmin'}}
         defaultActiveKey={list[0].grpI} 
         onSelect={(key) => handleSelect(key)}
       >

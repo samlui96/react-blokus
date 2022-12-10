@@ -164,31 +164,46 @@ _Below is an example of how you can instruct your audience on installing and set
 <!-- USAGE EXAMPLES -->
 ## Usage
 
+To begin with, right click any tile as starting point. It is temporary function and is for test purpose.
+<br />
+
 <a href="https://github.com/samlui96/react-blockus">
   <img src="images/usage0.png" alt="Logo" width="400" height="160">
 </a>
-To begin with, right click any tile as starting point. It is temporary function and is for test purpose.
+
+<br />
+Drag the target and drop it to the board. The color will be changed on time. Red color means it is invalid dropping place and Grey color means it is valid dropping place.
+<br />
 
 <a href="https://github.com/samlui96/react-blockus">
     <img src="images/usage1.png" alt="Logo" width="400" height="160">
 </a>
-Drag the target and drop it to the board. The color will be changed on time. Red color means it is invalid dropping place and Grey color means it is valid dropping place.
+
+<br />
+Click the same place where it dropped to confirm the move. (preventing the dropping mistakes.)
+<br />
 
 <a href="https://github.com/samlui96/react-blockus">
     <img src="images/usage2.png" alt="Logo" width="400" height="160">
 </a>
-Click the same place where it dropped to confirm the move. (preventing the dropping mistakes.)
+
+<br />
+Blue color implies the move is compelete.
+<br />
 
 <a href="https://github.com/samlui96/react-blockus">
     <img src="images/usage3.png" alt="Logo" width="400" height="160">
 </a>
-Blue color implies the move is compelete.
+
+<br />
+Click the Tap section to change the tile group.
+<br />
 
 <a href="https://github.com/samlui96/react-blockus">
     <img src="images/usage4.png" alt="Logo" width="400" height="160">
 </a>
-Click the Tap section to change the tile group.
 
+<br />
 <!-- _For more examples, please refer to the [Documentation](https://example.com)_ -->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
