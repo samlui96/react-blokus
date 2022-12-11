@@ -15,7 +15,7 @@ export const playerSlice = createSlice({
     changePlayer: (state, action) => {
       state.curPlayer = action.payload;
     },
-    changeTile: (state, action) => {
+    changePlayerTile: (state, action) => {
       state.tiles = action.payload;
     },
     startPlayer: (state, action) => {
@@ -30,6 +30,6 @@ export const playerSlice = createSlice({
   },
 });
 
-export const { changePlayer, changeTile, startPlayer, endPlayer, changePlayerScore } = playerSlice.actions;
+export const { changePlayer, changePlayerTile, startPlayer, endPlayer, changePlayerScore } = playerSlice.actions;
 
 export default playerSlice.reducer;

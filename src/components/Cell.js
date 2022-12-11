@@ -7,7 +7,7 @@ const offCell = {
   color: "#000000",
 };
 
-const Cell = ({ tiles, color }) => {
+const Cell = ({ tiles=[], color }) => {
   let cellArray = [];
   tiles.map((row, rowI) => {
     row.map((col, colI) => 

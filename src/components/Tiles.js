@@ -7,8 +7,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Cell from "./Cell"
 
 const Tiles = ( {playerState, tileState} ) => {
-  const [list, setList] = useState([playerState.tiles[playerState.curPlayer][0]]);
-
+  // const [list, setList] = useState([playerState.tiles[playerState.curPlayer][0]]);
+  const [list, setList] = useState([playerState.tiles[playerState.curPlayer][tileState.group]]);
   const dispatch = useDispatch();
   const classes = useStyles();
   const dragItem = useRef();
@@ -58,7 +58,6 @@ const Tiles = ( {playerState, tileState} ) => {
     <div>
       <Tabs 
         style={{maxWidth: '80vh', maxHeight: '10vh', overflow: 'auto', fontSize: '1.5vmin'}}
-        defaultActiveKey={list[0].grpI} 
         onSelect={(key) => handleSelect(key)}
       >
         {playerState.tiles[playerState.curPlayer].map((grp, grpI) => (
@@ -70,34 +69,35 @@ const Tiles = ( {playerState, tileState} ) => {
         ))}
       </Tabs>
       {list.map((grp, grpI) => (
-        <ListGroup
-          horizontal
-          key={grp.title}
-          className={classes.tileGroup}
-          onDragEnter={
-            tileState.dragging && !grp.items.length
-              ? (e) => handleDragEnter(e, { grpI, itmeI: 0 })
-              : null
-          }
-        >
-          <Row 
-            style={{ marginLeft: 0}}>
-            {grp.items.map((item, itemI) => (
-              <div 
-                style={{maxWidth: '70vh', maxHeight: '10vh', width: '10vh', padding: 0}}
-                key={item}
-                draggable
-                onDragStart={(e) => handleDragStart(e, { grpI, itemI })}
-                onDragEnter={(e) =>
-                  tileState.dragging ? handleDragEnter(e, { grpI, itemI }) : null
-                }
-              >
-                <Cell tiles={grp.tiles[item]} color={playerState.color[playerState.curPlayer]}></Cell> 
-              </div>
-            ))}
-          </Row>
-        </ListGroup>
-      ))}
+          <ListGroup
+            horizontal
+            key={grp.title}
+            className={classes.tileGroup}
+            onDragEnter={
+              tileState.dragging && !grp.items.length
+                ? (e) => handleDragEnter(e, { grpI, itmeI: 0 })
+                : null
+            }
+          >
+            <Row 
+              style={{ marginLeft: 0}}>
+              {grp.items.map((item, itemI) => (
+                <div 
+                  style={{maxWidth: '70vh', maxHeight: '10vh', width: '10vh', padding: 0}}
+                  key={item}
+                  draggable={grp.tiles !== {}}
+                  onDragStart={(e) => handleDragStart(e, { grpI, itemI })}
+                  onDragEnter={(e) =>
+                    tileState.dragging ? handleDragEnter(e, { grpI, itemI }) : null
+                  }
+                >
+                  <Cell tiles={grp.tiles[item]} color={playerState.color[playerState.curPlayer]}></Cell> 
+                </div>
+              ))}
+            </Row>
+          </ListGroup>
+          )) 
+        }
     </div>
   );
 };
