@@ -3,7 +3,6 @@ import useStyles from "./Grid.styles";
 import { useDispatch } from "react-redux";
 import { changeEndNode } from "../redux/tileSlice";
 import { changePlayer, changePlayerTile } from "../redux/playerSlice";
-import POLYOMINOES from './constant'
 
 const onCell = {
   on: true,
@@ -118,15 +117,18 @@ const Grid = ( {playerState, tileState} ) => {
         })
       );
       dispatch(changeEndNode())
+      /**
+       * for updating state
+       */
       let temp = JSON.parse(JSON.stringify(playerState.tiles));
-      temp[playerState.curPlayer][tileState.group].tiles = {}
+      // update item array of player tiles
+      temp[playerState.curPlayer][tileState.group].items = 
+        temp[playerState.curPlayer][tileState.group].items.filter(item => item !== tileState.id)
+      // update tiles object of player tiles
+      delete temp[playerState.curPlayer][tileState.group].tiles[tileState.id]
+      // update object 
       dispatch(changePlayerTile(temp))
       dispatch(changePlayer(playerState.curPlayer < 3 ? playerState.curPlayer + 1 : 0))
-      // console.log(temp[playerState.curPlayer][tileState.group])
-      // console.log(temp)
-      // console.log(playerState.tiles)
-      //dispatch(changeTile())
-      //dispatch(changePlayer(playerState.curPlayer < 3 ? playerState.curPlayer + 1 : 0))
     }
   };
 

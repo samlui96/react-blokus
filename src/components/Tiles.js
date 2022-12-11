@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import useStyles from "./Tiles.styles";
 import { useDispatch } from "react-redux";
 import { changeGroup, changeTile, changeEndNode, changeDragging } from "../redux/tileSlice";
@@ -7,13 +7,16 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Cell from "./Cell"
 
 const Tiles = ( {playerState, tileState} ) => {
-  // const [list, setList] = useState([playerState.tiles[playerState.curPlayer][0]]);
   const [list, setList] = useState([playerState.tiles[playerState.curPlayer][tileState.group]]);
   const dispatch = useDispatch();
   const classes = useStyles();
   const dragItem = useRef();
   const dragNode = useRef();
 
+  useEffect(() => {
+    setList([playerState.tiles[playerState.curPlayer][tileState.group]])
+  }, [tileState]);
+  
   const handleSelect = (key) => {
     dispatch(changeGroup(key));
     dispatch(changeEndNode());
@@ -85,7 +88,7 @@ const Tiles = ( {playerState, tileState} ) => {
                 <div 
                   style={{maxWidth: '70vh', maxHeight: '10vh', width: '10vh', padding: 0}}
                   key={item}
-                  draggable={grp.tiles !== {}}
+                  draggable={Object.keys(grp.tiles).length !== 0}
                   onDragStart={(e) => handleDragStart(e, { grpI, itemI })}
                   onDragEnter={(e) =>
                     tileState.dragging ? handleDragEnter(e, { grpI, itemI }) : null
