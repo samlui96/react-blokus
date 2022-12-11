@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import useStyles from "./Grid.styles";
 import { useDispatch } from "react-redux";
 import { changeEndNode } from "../redux/tileSlice";
-import { changePlayer } from "../redux/playerSlice";
+import { changePlayer, changePlayerTile } from "../redux/playerSlice";
 import POLYOMINOES from './constant'
 
 const onCell = {
@@ -118,6 +118,13 @@ const Grid = ( {playerState, tileState} ) => {
         })
       );
       dispatch(changeEndNode())
+      let temp = JSON.parse(JSON.stringify(playerState.tiles));
+      temp[playerState.curPlayer][tileState.group].tiles = {}
+      dispatch(changePlayerTile(temp))
+      dispatch(changePlayer(playerState.curPlayer < 3 ? playerState.curPlayer + 1 : 0))
+      // console.log(temp[playerState.curPlayer][tileState.group])
+      // console.log(temp)
+      // console.log(playerState.tiles)
       //dispatch(changeTile())
       //dispatch(changePlayer(playerState.curPlayer < 3 ? playerState.curPlayer + 1 : 0))
     }
@@ -125,11 +132,6 @@ const Grid = ( {playerState, tileState} ) => {
 
   const updateDefaultCell = (i) => (e) => {
     e.preventDefault()
-    // console.log(playerState.tiles[playerState.curPlayer])
-    // let test = playerState.tiles[playerState.curPlayer]
-    // console.log(test[tileState.group].tiles)
-    // delete test[tileState.group].tiles[tileState.id]
-    // let obj = test[tileState.group].tiles
     cells[i] = {
       on: true,
       lock: true,
@@ -178,7 +180,7 @@ const Grid = ( {playerState, tileState} ) => {
       // 5. update the custom cells by checking rules
       if (curTiles.length === 5-tileState.group && cornTiles.length > 0)
         surTiles.forEach((item) => {
-          if (cells[item].lock && customCell === onCell) {
+          if (cells[item].lock && cells[item] === playerState.color[playerState.curPlayer] && customCell === onCell) {
             customCell = wrongCell
           }
         })
