@@ -4,10 +4,10 @@ import POLYOMINOES from '../components/constant'
 export const playerSlice = createSlice({
   name: "player",
   initialState: {
-    curPlayer: 3,
+    curPlayer: 0,
     color: ["blue", "yellow", "green", "orange"],
     tiles: Array.from({ length: 4 }, () => POLYOMINOES),
-    start: [false, false, false, false],
+    start: [true, true, true, true],
     end: [false, false, false, false],
     score: [0, 0, 0, 0],
   },
