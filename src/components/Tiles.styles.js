@@ -8,7 +8,7 @@ export default createUseStyles({
         padding: '1vh 1vh 1vh',
         //flexDirection: 'row',
         width: '70vh',
-        height: '20vh', 
+        height: '18vh', 
     },
     // currentTile: {
     //     backgroundColor: '#49505e',

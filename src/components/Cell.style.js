@@ -17,8 +17,8 @@ export default createUseStyles({
         background: 'white',
         transition: 'all 100ms linear',
         position: 'relative',
-        pointerEvents: 'none'
-        //margin: '0.05vh',
+        pointerEvents: 'none',
+        margin: '0.1vh',
     }
 })
 
