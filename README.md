@@ -164,46 +164,41 @@ _Below is an example of how you can instruct your audience on installing and set
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-To begin with, right click any tile as starting point. It is temporary function and is for test purpose.
-<br />
-
-<a href="https://github.com/samlui96/react-blockus">
-  <img src="images/usage0.png" alt="Logo" width="400" height="160">
-</a>
+Drag the target and drop it to the board. The color will be changed on time. Red color means it is invalid dropping place and Grey color means it is valid dropping place. (For First step, tiles must be placed on corner)
 
 <br />
-Drag the target and drop it to the board. The color will be changed on time. Red color means it is invalid dropping place and Grey color means it is valid dropping place.
-<br />
-
 <a href="https://github.com/samlui96/react-blockus">
     <img src="images/usage1.png" alt="Logo" width="400" height="160">
 </a>
-
 <br />
+
 Click the same place where it dropped to confirm the move. (preventing the dropping mistakes.)
-<br />
 
+<br />
 <a href="https://github.com/samlui96/react-blockus">
     <img src="images/usage2.png" alt="Logo" width="400" height="160">
 </a>
 
 <br />
-Blue color implies the move is compelete.
-<br />
 
+Blue color implies the move is compelete. The turn will be changed to next player.
+
+<br />
 <a href="https://github.com/samlui96/react-blockus">
     <img src="images/usage3.png" alt="Logo" width="400" height="160">
 </a>
-
-<br />
-Click the Tap section to change the tile group.
 <br />
 
+Click the Tap section to change the tile group. For the tiles, player can rotate it 90 degees clockwisely by _Left Click_, and reflect it by _Right Click_.
+
+<br />
 <a href="https://github.com/samlui96/react-blockus">
     <img src="images/usage4.png" alt="Logo" width="400" height="160">
 </a>
-
 <br />
+
+Players can _skip their turns_, or _end their games_. For the player who end their game, their turn will be skipped in every circle.
+
 <!-- _For more examples, please refer to the [Documentation](https://example.com)_ -->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -302,7 +297,6 @@ Use this space to list resources you find helpful and would like to give credit 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/samlui96
 [product-screenshot]: images/screenshot.png
-[product-usage0]: images/usage0.png
 [product-usage1]: images/usage1.png
 [product-usage2]: images/usage2.png
 [product-usage3]: images/usage3.png

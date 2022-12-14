@@ -145,9 +145,7 @@ const Grid = ({ playerState, tileState }) => {
       delete temp[playerState.curPlayer][tileState.group].tiles[tileState.id];
       // update object
       dispatch(changePlayerTile(temp));
-      dispatch(
-        changePlayer(playerState.curPlayer < 3 ? playerState.curPlayer + 1 : 0)
-      );
+      dispatch(changePlayer(playerState.curPlayer));
     }
   };
 

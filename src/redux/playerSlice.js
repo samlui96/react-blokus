@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import POLYOMINOES from '../components/constant'
+import POLYOMINOES from "../components/constant";
 
 export const playerSlice = createSlice({
   name: "player",
@@ -13,6 +13,9 @@ export const playerSlice = createSlice({
   },
   reducers: {
     changePlayer: (state, action) => {
+      do {
+        action.payload = action.payload < 3 ? action.payload + 1 : 0;
+      } while (state.end[action.payload]);
       state.curPlayer = action.payload;
     },
     changePlayerTile: (state, action) => {
@@ -22,7 +25,7 @@ export const playerSlice = createSlice({
       state.start = action.payload;
     },
     endPlayer: (state, action) => {
-      state.end = action.payload;
+      state.end[action.payload] = true;
     },
     changePlayerScore: (state, action) => {
       state.score = action.payload;
@@ -30,6 +33,12 @@ export const playerSlice = createSlice({
   },
 });
 
-export const { changePlayer, changePlayerTile, startPlayer, endPlayer, changePlayerScore } = playerSlice.actions;
+export const {
+  changePlayer,
+  changePlayerTile,
+  startPlayer,
+  endPlayer,
+  changePlayerScore,
+} = playerSlice.actions;
 
 export default playerSlice.reducer;
