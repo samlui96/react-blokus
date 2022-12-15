@@ -189,7 +189,7 @@ Blue color implies the move is compelete. The turn will be changed to next playe
 </a>
 <br />
 
-Click the Tap section to change the tile group. For the tiles, player can rotate it 90 degees clockwisely by _Left Click_, and reflect it by _Right Click_.
+Click the Tap section to change the tile group. For the tiles, player can rotate it 90 degees clockwisely by **Left Click**, and reflect it by **Right Click**.
 
 <br />
 <a href="https://github.com/samlui96/react-blockus">
@@ -197,7 +197,7 @@ Click the Tap section to change the tile group. For the tiles, player can rotate
 </a>
 <br />
 
-Players can _skip their turns_, or _end their games_. For the player who end their game, their turn will be skipped in every circle.
+Players can **skip their turns**, or **end their games**. For the player who end their game, their turn will be skipped in every circle.
 
 <!-- _For more examples, please refer to the [Documentation](https://example.com)_ -->
 
@@ -210,7 +210,8 @@ Players can _skip their turns_, or _end their games_. For the player who end the
 
 State 1: Offline Version
 - [x] Create Blockus Template
-- [ ] Add Multiple Player Function (offline)
+- [x] Add Multiple Player Function (offline)
+- [ ] Create temporary DataBase for Saving Game Record
 - [ ] Add Differnet Pages for ease to use
     - [ ] Main Page
     - [ ] Introduction page
@@ -260,7 +261,7 @@ License will be uploaded soon.
 
 [Sam Lui](https://www.linkedin.com/in/paksumlui/) - luipaksum@hotmail.com
 
-Project Link: [https://github.com/samlui96/react-blockus](https://github.com/samlui96/react-blockus)
+Project Link: [https://github.com/samlui96/react-blokus](https://github.com/samlui96/react-blokus)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
